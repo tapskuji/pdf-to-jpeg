@@ -1,0 +1,4 @@
+.env
+app/logs/*.log
+app/files/images/*.jpg
+app/files/images/*.jpeg

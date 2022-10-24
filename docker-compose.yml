@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+
+  php:
+    container_name: legacy-php-1
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    networks:
+      - legacy
+    environment:
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_HOST: '${DB_HOST}'
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - '${HTTP_PORT:-8000}:80'
+#    depends_on:
+#      - mysql
+
+  # Mysql Database Server
+#  mysql:
+#    container_name: legacy-database-1
+#    image: mysql:5.7
+#    ports:
+#      - '${DB_PORT:-3306}:3306'
+#    networks:
+#      - legacy
+#    environment:
+#      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+#      MYSQL_USER: '${DB_USERNAME}'
+#      MYSQL_PASSWORD: '${DB_PASSWORD}'
+#      MYSQL_DATABASE: '${DB_DATABASE}'
+#    volumes:
+#      - "mysql_data:/var/lib/mysql"
+#      - ./docker/mysql/data/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+networks:
+  legacy:
+    driver: bridge
+volumes:
+  mysql_data: { driver: local }
