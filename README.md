@@ -7,6 +7,8 @@ Build an app that will convert a PDF files to an image.
 ## Requirements
 
 - Each page in the PDF file must be converted to an image
+- Delete the PDF file after processing it
+- Name the image using invoice number
 - Must run on PHP 5.3 server
 - Be mindful of CPU load
 
